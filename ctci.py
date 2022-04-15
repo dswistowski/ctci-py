@@ -150,16 +150,37 @@ def exercise(ctx: Context, chapter: int | None):
 
 def exercise_content(exercise_name: str) -> str:
     exercise_name = safe(exercise_name, "_")
-    return f"""def {exercise_name}():
+    return f"""\"\"\"
+TODO: add description
+\"\"\"
+import pytest
+
+
+def {exercise_name}(input):
     ...
 
 
-def test_{exercise_name}():
-    assert False
+@pytest.fixture(
+    params=[
+        {exercise_name},
+    ]
+)
+def function_under_test(request):
+    return request.param
+    
+
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        ("foo", False),
+    ],
+)
+def test_{exercise_name}(input, expected, function_under_test):
+    assert function_under_test(input) == expected
 
 
 if __name__ == "__main__":
-   {exercise_name}()
+    print(f"{{{exercise_name}('')=}}")
 """
 
 
