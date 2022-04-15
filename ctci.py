@@ -38,6 +38,9 @@ class Exercise:
     name: str
     number: int
 
+    def __str__(self):
+        return f"{self.number:02} {unsafe(self.name, '_')}"
+
     @property
     def file_name(self) -> str:
         return f"{EXERCISE_PREFIX}_{self.number:02}_{self.name}.py"
@@ -64,9 +67,18 @@ class Chapter:
         return f"{CHAPTER_PREFIX}-{self.number:02}-{self.name}"
 
 
+def exercise_from_path(path: Path) -> Exercise:
+    _, number, name = path.name.split("_", 2)
+    return Exercise(
+        number=int(number),
+        name=name[:-(len('.py'))]
+    )
+
 def chapter_from_path(path: Path) -> Chapter:
     _, number, name = path.name.split("-", 2)
-    return Chapter(name=name, number=int(number), exercises=[])
+    exercises = [exercise_from_path(Path(exercise)) for exercise in glob(str(path / f"{EXERCISE_PREFIX}_*"))]
+
+    return Chapter(name=name, number=int(number), exercises=exercises)
 
 
 def all_chapters(path: Path) -> list[Chapter]:
@@ -91,6 +103,9 @@ def chapter_list():
     """List chapters"""
     for chapter in all_chapters(WORKING_DIR):
         print(f"Chapter: {color.BOLD}{chapter}{color.END}")
+
+        for exercise in chapter.exercises:
+            print(f" •  {color.BOLD}{exercise}{color.END}")
 
 
 @chapter.command("add")
