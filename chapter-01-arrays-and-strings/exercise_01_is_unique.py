@@ -24,13 +24,7 @@ def is_unique_ascii(input: str) -> bool:
     return True
 
 
-
-params = [
-    ('', True),
-    ('a', True),
-    ('abc', True),
-    ('abca', False)
-]
+params = [("", True), ("a", True), ("abc", True), ("abca", False)]
 
 
 @pytest.fixture(params=[is_unique, is_unique_ascii])

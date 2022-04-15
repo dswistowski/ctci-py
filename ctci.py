@@ -69,14 +69,15 @@ class Chapter:
 
 def exercise_from_path(path: Path) -> Exercise:
     _, number, name = path.name.split("_", 2)
-    return Exercise(
-        number=int(number),
-        name=name[:-(len('.py'))]
-    )
+    return Exercise(number=int(number), name=name[: -(len(".py"))])
+
 
 def chapter_from_path(path: Path) -> Chapter:
     _, number, name = path.name.split("-", 2)
-    exercises = [exercise_from_path(Path(exercise)) for exercise in glob(str(path / f"{EXERCISE_PREFIX}_*"))]
+    exercises = [
+        exercise_from_path(Path(exercise))
+        for exercise in glob(str(path / f"{EXERCISE_PREFIX}_*"))
+    ]
 
     return Chapter(name=name, number=int(number), exercises=exercises)
 
