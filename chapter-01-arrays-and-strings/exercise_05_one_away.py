@@ -30,7 +30,7 @@ def one_away(s1: str, s2: str) -> bool:
                 break
         else:
             return True
-        return s1[i + 1:] == s2[i:]
+        return s1[i + 1 :] == s2[i:]
     return False
 
 
