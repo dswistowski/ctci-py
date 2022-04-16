@@ -19,6 +19,9 @@ class Node(t.Generic[T]):
             return self.to_list() == other.to_list()
         return False
 
+    def __repr__(self):
+        return f"<Node {self.to_list()}>"
+
 
 def from_iterable(inputs: T) -> Node[T] | None:
     current = None
