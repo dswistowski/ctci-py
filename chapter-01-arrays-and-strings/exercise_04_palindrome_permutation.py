@@ -30,8 +30,8 @@ def palindrome_permutation_ascii(word: str) -> bool:
 
 def _palindrome_permutation_ascii(word: bytes) -> bool:
     characters = [0 for _ in range(256)]
-    for l in filter(lambda c: c != 32, word):
-        characters[l] += 1
+    for letter in filter(lambda character: character != 32, word):
+        characters[letter] += 1
 
     odd = 0
     for c in characters:

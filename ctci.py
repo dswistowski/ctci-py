@@ -2,7 +2,6 @@ from glob import glob
 import dataclasses as dt
 import typing as t
 from pathlib import Path
-
 import click
 from click import Context, UsageError
 
@@ -167,7 +166,7 @@ def {exercise_name}(input):
 )
 def function_under_test(request):
     return request.param
-    
+
 
 @pytest.mark.parametrize(
     "input,expected",
