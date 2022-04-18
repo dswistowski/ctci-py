@@ -2,15 +2,7 @@
 Implement a function to chekc if a linked list is a palindrome.
 """
 import pytest
-from linked_list import Node, from_iterable, T
-
-
-def push(head: Node, value: T) -> Node:
-    return Node(data=value, next=head)
-
-
-def pop(head: Node) -> tuple[Node, T]:
-    return head.next, head.data
+from linked_list import Node, from_iterable, push, pop
 
 
 def palindrome(head: Node):
