@@ -28,3 +28,27 @@ def from_iterable(inputs: T) -> Node[T] | None:
     for data in reversed(inputs):
         current = Node(next=current, data=data)
     return current
+
+
+def push(head: Node, value: T) -> Node:
+    return Node(data=value, next=head)
+
+
+def pop(head: Node) -> tuple[Node, T]:
+    return head.next, head.data
+
+
+def glue(l1: Node, l2: Node | None) -> Node:
+    head = l1
+    while head.next:
+        head = head.next
+    head.next = l2
+    return l1
+
+
+def to_stack(list: Node):
+    stack = None
+    while list:
+        stack = push(stack, list)
+        list = list.next
+    return stack
