@@ -6,7 +6,7 @@ authors = ["Damian Świstowski <damian@swistowski.org>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-click = "^8.1.2"
+click = "^8.1.4"
 black = "^22.3.0"
 
 [tool.poetry.dev-dependencies]
